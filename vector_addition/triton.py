@@ -20,4 +20,4 @@ def vector_add_kernel(a, b, c, n_elements, BLOCK_SIZE: tl.constexpr):
 def solve(a: torch.Tensor, b: torch.Tensor, c: torch.Tensor, N: int):
     BLOCK_SIZE = 1024 # 1 Block = 1 SM = 1 PI, and each SM contains threads. Each PI processes 1024 elements of a vector
     grid = (triton.cdiv(N, BLOCK_SIZE),) # the minimum no of blocks you need to solve the problem for a vector of shape N
-    vector_add_kernel[grid](a, b, c, N, BLOCK_SIZE) # Note - grid is NOT related to SMs at all. This is just to tell Triton how much computation you need to solve the problem
+    vector_add_kernel[grid](a, b, c, N, BLOCK_SIZE) # fNote - grid is NOT related to SMs at all. This is just to tell Triton how much computation you need to solve the problem
